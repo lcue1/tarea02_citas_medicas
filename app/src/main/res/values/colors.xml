@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="principalColorApp">#8D9BE9</color>
-    <color name="secundaryColorApp">#673AB7</color>
+    <color name="principalColorApp">#673AB7</color>
+    <color name="secundaryColorApp">#9C27B0</color>
     <color name="normalBtn">#FF9800</color>
     <color name="exitBtn">#FA685D</color>
 </resources>

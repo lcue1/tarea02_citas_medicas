@@ -3,6 +3,7 @@
 
     <!--Main activity-->
     <string name="exitBtn">Salirr!</string>
+    <string name="titleText">Iniciar sesión</string>
     <string name="hintNameLogin">Ingrese nombre</string>
     <string name="hintPasswordLogin">Ingrese contraseña</string>
     <string name="btnLoginText">Iniciar</string>

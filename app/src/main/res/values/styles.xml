@@ -5,8 +5,8 @@
     <dimen name="normalText">16sp</dimen>
     <dimen name="subtitleText">18sp</dimen>
     <dimen name="titleText">20sp</dimen>
-    <dimen name="textEdittext">30sp</dimen>
-    <!--Edit text -->
+    <dimen name="textEdittext">28sp</dimen>
+    <!--Buttons text -->
     <style name="normalBtn">
         <item name="android:textSize">@dimen/normalText</item>
         <item name="android:textColor">@color/white</item>
@@ -17,10 +17,26 @@
         <item name="android:backgroundTint">@color/exitBtn</item>
     </style>
 
-<!--Edit text -->
+    <!--Edit text -->
     <style name="normalEditText">
         <item name="android:textSize">@dimen/textEdittext</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@color/white</item>
     </style>
+
+    <!--Text  -->
+    <style name="normaText">
+        <item name="android:textSize">@dimen/normalText</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!--Title  -->
+    <style name="titleText">
+        <item name="android:textSize">@dimen/titleText</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
+
 </resources>
