@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Citas Medicas</string>
+
+    <!--Main activity-->
+    <string name="exitBtn">Salirr!</string>
+    <string name="hintNameLogin">Ingrese nombre</string>
+    <string name="hintPasswordLogin">Ingrese contraseña</string>
+    <string name="btnLoginText">Iniciar</string>
+</resources>
