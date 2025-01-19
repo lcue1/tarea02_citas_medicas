@@ -43,14 +43,12 @@
             style="@style/normalEditText"
             android:layout_marginBottom="40dp"
             />
-        <EditText
-            android:id="@+id/userPassword"
+        <Spinner
+            android:id="@+id/typeUserSpiner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:hint="@string/hintNameLogin"
-            android:background="@color/white"
-            style="@style/normalEditText"
+
             />
         <Button
             android:id="@+id/loginBtn"
