@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CitasMedicas"
         tools:targetApi="31">
         <activity
+            android:name=".ui.PacientActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
