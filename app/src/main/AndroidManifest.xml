@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CitasMedicas"
         tools:targetApi="31">
         <activity
+            android:name=".ui.admin.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Pacient.PacientActivity"
             android:exported="false" />
         <activity

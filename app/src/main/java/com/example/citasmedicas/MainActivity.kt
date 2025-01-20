@@ -12,6 +12,7 @@ import com.example.citasmedicas.data.Users.User
 import com.example.citasmedicas.databinding.ActivityMainBinding
 import com.example.citasmedicas.ui.ExitDialog
 import com.example.citasmedicas.ui.Pacient.PacientActivity
+import com.example.citasmedicas.ui.admin.AdminActivity
 import com.example.citasmedicas.utils.Validations
 import com.example.citasmedicas.viewModel.UserViewModel
 
@@ -64,9 +65,12 @@ class MainActivity : AppCompatActivity() {
                 if(user.type=="Paciente"){
                 Log.d("user",user.toString())
                     val intent = Intent(this, PacientActivity::class.java)
-                    intent.putExtra("name",user.name)
+                    intent.putExtra("userName",user.name)
                 startActivity(intent)
                 }else if(user.type=="Admin"){
+                    val intent = Intent(this, AdminActivity::class.java)
+                    intent.putExtra("userName",user.name)
+                    startActivity(intent)
                     Log.d("user",user.toString())
 
                 }
