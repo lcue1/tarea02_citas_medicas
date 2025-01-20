@@ -62,5 +62,9 @@ dependencies {
     // Dependencia de Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
+    //Nbigationval
+    val navVersion="2.8.5"
+    implementation("androidx.navigation:navigation-fragment:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 }
 
