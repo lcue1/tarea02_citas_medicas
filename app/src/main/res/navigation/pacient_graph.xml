@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/medicalAppointmentFragment"
-        android:name="com.example.citasmedicas.ui.Pacient.MedicalAppointmentFragment"
+        android:name="com.example.citasmedicas.ui.fragments.MedicalAppointmentFragment"
         android:label="fragment_medical_appointment"
         tools:layout="@layout/fragment_medical_appointment" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/scheduleAppointmentFragment"
-        android:name="com.example.citasmedicas.ui.Pacient.ScheduleAppointmentFragment"
+        android:name="com.example.citasmedicas.ui.fragments.ScheduleAppointmentFragment"
         android:label="fragment_schedule_appointment"
         tools:layout="@layout/fragment_schedule_appointment" >
         <action

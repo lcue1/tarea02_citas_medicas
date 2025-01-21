@@ -1,4 +1,4 @@
-package com.example.citasmedicas.ui.Pacient
+package com.example.citasmedicas.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.citasmedicas.R
-import com.example.citasmedicas.databinding.ActivityPacientBinding
-import com.example.citasmedicas.databinding.FragmentMedicalAppointmentBinding
 
 class MedicalAppointmentFragment : Fragment() {
 

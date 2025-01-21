@@ -16,7 +16,7 @@
             android:name=".ui.admin.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Pacient.PacientActivity"
+            android:name=".ui.pacient.PacientActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

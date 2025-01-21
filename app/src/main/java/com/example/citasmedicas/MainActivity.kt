@@ -1,7 +1,6 @@
 package com.example.citasmedicas
 
 import android.content.Intent
-import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -11,7 +10,7 @@ import com.example.citasmedicas.data.AppDatabase
 import com.example.citasmedicas.data.Users.User
 import com.example.citasmedicas.databinding.ActivityMainBinding
 import com.example.citasmedicas.ui.ExitDialog
-import com.example.citasmedicas.ui.Pacient.PacientActivity
+import com.example.citasmedicas.ui.pacient.PacientActivity
 import com.example.citasmedicas.ui.admin.AdminActivity
 import com.example.citasmedicas.utils.Validations
 import com.example.citasmedicas.viewModel.UserViewModel
