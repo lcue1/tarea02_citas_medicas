@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.citasmedicas.R
 import com.example.citasmedicas.databinding.FragmentMedicalAppointmentBinding
+import com.example.citasmedicas.ui.user.Utils
 
 
 class ScheduleAppointmentFragment : Fragment() {
@@ -27,18 +28,24 @@ class ScheduleAppointmentFragment : Fragment() {
         _binding = FragmentMedicalAppointmentBinding.inflate(inflater, container, false)
         userName = arguments?.getString("userName")
         Log.d("userName",userName.toString())
+        clickListener()
+        return binding.root
+    }
 
+    private fun clickListener() {
         binding.scheduleBtn.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("userName", userName) // Reemplaza "John Doe" con el valor dinámico
-            }
-
-            findNavController().navigate(
-                R.id.action_scheduleAppointmentFragment_to_medicalAppointmentFragment,
-                bundle
+            Utils.sendUserNameToAnotherFragment(
+                currentFragment = this,
+                userName = userName!!,
+                targetFragment = R.id.action_scheduleAppointmentFragment_to_medicalAppointmentFragment
             )
         }
-        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Evitar pérdidas de memoria
+        _binding = null
     }
 
 }

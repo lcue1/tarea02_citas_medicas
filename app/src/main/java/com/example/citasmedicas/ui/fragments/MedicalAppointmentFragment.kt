@@ -11,6 +11,7 @@ import com.example.citasmedicas.R
 import com.example.citasmedicas.data.AppDatabase
 import com.example.citasmedicas.data.Users.User
 import com.example.citasmedicas.databinding.FragmentMedicalAppointmentBinding
+import com.example.citasmedicas.ui.user.Utils
 import com.example.citasmedicas.viewModel.UserViewModel
 
 
@@ -69,6 +70,16 @@ class MedicalAppointmentFragment : Fragment() {
 
     }
 
+    private fun clickListeners() {//handle listeners click buttons
+        binding.scheduleBtn.setOnClickListener {//go to schedule appointment and send userName
+            Utils.sendUserNameToAnotherFragment(
+                currentFragment = this,
+                userName = userName!!,
+                targetFragment = R.id.action_medicalAppointmentFragment_to_scheduleAppointmentFragment
+            )
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -77,18 +88,5 @@ class MedicalAppointmentFragment : Fragment() {
     }
 
 
-
-    private fun clickListeners() {//handle listeners click buttons
-        binding.scheduleBtn.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("userName", userName) // Reemplaza "John Doe" con el valor dinámico
-            }
-
-            findNavController().navigate(R.id.action_medicalAppointmentFragment_to_scheduleAppointmentFragment, bundle)
-        }
-    }
-
 }
 
-/*
- */
