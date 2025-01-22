@@ -29,7 +29,6 @@ class UserViewModel : ViewModel() {
                val user = database.userDao().getUserByUserName(name)
                     doSometing(user)
 
-
         }
     }
 }

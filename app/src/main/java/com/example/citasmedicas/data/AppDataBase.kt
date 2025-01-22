@@ -10,7 +10,7 @@ import com.example.citasmedicas.data.doctor.Doctor
 import com.example.citasmedicas.data.doctor.DoctorDao
 
 
-@Database(entities = [User::class, Doctor::class], version = 2, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [User::class, Doctor::class], version = 1, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun doctorDao(): DoctorDao
 
