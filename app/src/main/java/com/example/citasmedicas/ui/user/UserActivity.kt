@@ -1,15 +1,13 @@
-package com.example.citasmedicas.ui.admin
+package com.example.citasmedicas.ui.user
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.example.citasmedicas.R
 
-class AdminActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
