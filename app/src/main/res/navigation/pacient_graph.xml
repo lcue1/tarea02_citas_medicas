@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_medicalAppointmentFragment_to_scheduleAppointmentFragment"
             app:destination="@id/scheduleAppointmentFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string"
+            android:defaultValue="undefined" />
     </fragment>
     <fragment
         android:id="@+id/scheduleAppointmentFragment"

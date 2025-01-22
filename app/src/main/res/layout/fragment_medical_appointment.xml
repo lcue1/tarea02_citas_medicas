@@ -15,9 +15,9 @@
         >
 
         <TextView
+            android:id="@+id/userTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Paciente"
             style="@style/titleText"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

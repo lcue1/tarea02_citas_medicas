@@ -10,8 +10,8 @@ import com.example.citasmedicas.data.AppDatabase
 import com.example.citasmedicas.data.Users.User
 import com.example.citasmedicas.databinding.ActivityMainBinding
 import com.example.citasmedicas.ui.ExitDialog
-import com.example.citasmedicas.ui.pacient.PacientActivity
 import com.example.citasmedicas.ui.admin.AdminActivity
+import com.example.citasmedicas.ui.pacient.PacientActivity
 import com.example.citasmedicas.utils.Validations
 import com.example.citasmedicas.viewModel.UserViewModel
 
@@ -61,18 +61,11 @@ class MainActivity : AppCompatActivity() {
             name=binding.userName.text.toString(),
             database = database,
             doSometing = {user->
-                if(user.type=="Paciente"){
-                Log.d("user",user.toString())
-                    val intent = Intent(this, PacientActivity::class.java)
-                    intent.putExtra("userName",user.name)
+                Log.d("userrrr",user.toString())
+                val intent = Intent(this, AdminActivity::class.java)
+                intent.putExtra("userName",user.name)
                 startActivity(intent)
-                }else if(user.type=="Admin"){
-                    val intent = Intent(this, AdminActivity::class.java)
-                    intent.putExtra("userName",user.name)
-                    startActivity(intent)
-                    Log.d("user",user.toString())
 
-                }
             }
         )
     }
