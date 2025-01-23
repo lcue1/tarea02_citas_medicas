@@ -6,13 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.citasmedicas.data.Users.User
 import com.example.citasmedicas.data.Users.UserDao
+import com.example.citasmedicas.data.appointments.Appointment
+import com.example.citasmedicas.data.appointments.AppointmentsDao
 import com.example.citasmedicas.data.doctor.Doctor
 import com.example.citasmedicas.data.doctor.DoctorDao
 
 
-@Database(entities = [User::class, Doctor::class], version = 1, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [User::class, Doctor::class, Appointment::class], version = 1, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun doctorDao(): DoctorDao
+    abstract fun appointmentsDao(): AppointmentsDao
 
     companion object {
         @Volatile

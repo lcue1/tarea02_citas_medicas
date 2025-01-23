@@ -111,17 +111,17 @@ class MainActivity : AppCompatActivity() {
             )
             userViewModel.insertUser(newUser, database,
                 onSuccess = {//user created
-                    defineUserType()
+                    openUserActivity()
                 },
                 onError = { errorMessage ->//user exist
-                    defineUserType()
+                    openUserActivity()
                 }
             )
 
         }
     }
 
-    private fun defineUserType() {// open paciente ui or Admin ui
+    private fun openUserActivity() {// open paciente ui or Admin ui
         userViewModel.selectUserByUserName(// ask view model for an user
             name=binding.userName.text.toString(),
             database = database,
