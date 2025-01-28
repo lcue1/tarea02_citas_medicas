@@ -29,7 +29,6 @@ class AppointmentsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val appointments = database.appointmentsDao().getAllAppointments()
             doSometing(appointments)
-
         }
 
 

@@ -16,6 +16,9 @@
     <style name="exitBtn" parent="normalBtn">
         <item name="android:backgroundTint">@color/exitBtn</item>
     </style>
+    <style name="addBtn" parent="normalBtn">
+        <item name="android:backgroundTint">@color/green</item>
+    </style>
 
     <!--Edit text -->
     <style name="normalEditText">

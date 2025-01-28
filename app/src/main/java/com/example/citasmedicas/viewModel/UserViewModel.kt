@@ -26,8 +26,16 @@ class UserViewModel : ViewModel() {
 
     fun selectUserByUserName(name: String, database: AppDatabase, doSometing:(user:User)->Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-               val user = database.userDao().getUserByUserName(name)
-                    doSometing(user)
+            val user = database.userDao().getUserByUserName(name)
+            doSometing(user)
+
+        }
+    }
+
+    fun selectAllUsersByType( userType:String,database: AppDatabase, doSometing:(users:List<User>)->Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val users = database.userDao().getUserByUserType(userType)
+            doSometing(users)
 
         }
     }

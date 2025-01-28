@@ -7,6 +7,14 @@
     <string name="hintNameLogin">Ingrese nombre</string>
     <string name="hintMedicalSpeciality">Especialidad</string>
     <string name="btnLoginText">Iniciar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Add appointment  fragment-->
+    <string name="addAppointmentTitle">Agendar cita</string>
+    <string name="selectPasient">Seleccione pasiente</string>
+    <string name="selectDoctor">Seleccione doctor </string>
+    <string name="stateAppointment">Estado </string>
+    <string name="addAppointmentBtn">Agregar </string>
+
+
+
 </resources>

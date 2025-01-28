@@ -13,7 +13,7 @@ interface AppointmentsDao {
     suspend fun inserAppointment(appointment: Appointment): Long
 
 
-    @Query("SELECT * FROM Appointments")
+    @Query("SELECT * FROM Appointments ORDER BY fecha ASC, medicoId ASC")
     suspend fun getAllAppointments(): List<Appointment>
 
 }
