@@ -27,14 +27,18 @@ class DoctorViewModel : ViewModel() {
         }
     }
 
-     fun getAllDoctors(database: AppDatabase, doSometing:(doctors:List<Doctor>)->Unit) {
+    fun getAllDoctors(database: AppDatabase, doSometing:(doctors:List<Doctor>)->Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             val doctors = database.doctorDao().getAllDoctors()
             doSometing(doctors)
-
         }
 
-
+    }
+    fun selectDoctorById(id: Int, database: AppDatabase, doSometing:(doctor:Doctor)->Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val doctor = database.doctorDao().getDoctorById(id)
+            doSometing(doctor)
+        }
     }
 
 

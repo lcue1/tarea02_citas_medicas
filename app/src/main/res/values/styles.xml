@@ -39,7 +39,45 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+<!-- Cardview -->
+    <!-- Estilo base para todos los TextViews -->
+    <style name="BaseTextViewStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/normalText</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
+    <!-- Estilo para el nombre del usuario (resaltado y más grande) -->
+    <style name="UserNameTextViewStyle" parent="BaseTextViewStyle">
+        <item name="android:textSize">@dimen/titleText</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <!-- Estilo para el nombre del doctor (similar al usuario) -->
+    <style name="DoctorNameTextViewStyle" parent="UserNameTextViewStyle" />
+
+    <!-- Estilo para la fecha -->
+    <style name="DateTextViewStyle" parent="BaseTextViewStyle" >
+
+    </style>
+
+    <!-- Estilo para la hora (ligera cursiva) -->
+    <style name="HourTextViewStyle" parent="BaseTextViewStyle">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <!-- Estilo para la especialidad del doctor (ligera cursiva y más ligera) -->
+    <style name="SpecialityTextViewStyle" parent="BaseTextViewStyle">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
 
 
 </resources>

@@ -6,12 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.citasmedicas.R
 import com.example.citasmedicas.data.AppDatabase
 import com.example.citasmedicas.data.Users.User
+import com.example.citasmedicas.data.doctor.Doctor
 import com.example.citasmedicas.databinding.FragmentMedicalAppointmentBinding
+import com.example.citasmedicas.ui.adapters.AppointmentAdapter
+import com.example.citasmedicas.ui.adapters.AppointmentItem
 import com.example.citasmedicas.ui.user.Utils
 import com.example.citasmedicas.viewModel.AppointmentsViewModel
+import com.example.citasmedicas.viewModel.DoctorViewModel
 import com.example.citasmedicas.viewModel.UserViewModel
 
 
@@ -71,6 +77,27 @@ class MedicalAppointmentFragment : Fragment() {
             database = database,
             doSometing = {appointments->
                 Log.d("appointments",appointments.toString())
+                 val appointmentItems = arrayListOf<AppointmentItem>()
+                for( a in appointments){
+                    val appointmentItem =AppointmentItem(
+                        userName = a.id.toString(),
+                        dateAppointment = a.fecha,
+                        hourAppointment=a.hora,
+                        doctorName = a.medicoId.toString(),
+                        specialityDoctor = ""
+                        )
+                    appointmentItems.add(appointmentItem)
+
+                }
+                Log.d("appointments",appointmentItems.toString())
+
+                //recycler
+                val appointMentAdapter = AppointmentAdapter(appointmentItems)
+
+                val recyclerView: RecyclerView = binding.appointmentRecycler
+                recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                recyclerView.adapter = appointMentAdapter
+
 
             }
         )

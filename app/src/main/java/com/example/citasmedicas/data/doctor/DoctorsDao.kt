@@ -14,4 +14,7 @@ interface DoctorDao{
 
     @Query("SELECT * FROM Doctors")
     suspend fun getAllDoctors(): List<Doctor>
+
+    @Query("SELECT * FROM Doctors WHERE id = :id")
+    suspend fun getDoctorById(id:Int): Doctor
 }
