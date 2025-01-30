@@ -31,8 +31,12 @@ class AppointmentsViewModel : ViewModel() {
             doSometing(appointments)
         }
 
-
     }
 
-
+    fun getAppointmentByUserId(id: Int,database: AppDatabase, doSometing:(doctors:List<Appointment>)->Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val appointments = database.appointmentsDao().getById(id)
+            doSometing(appointments)
+        }
+    }
 }

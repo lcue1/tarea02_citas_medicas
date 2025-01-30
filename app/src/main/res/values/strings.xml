@@ -10,7 +10,7 @@
 
     <!--Add appointment  fragment-->
     <string name="addAppointmentTitle">Agendar cita</string>
-    <string name="selectPasient">Seleccione pasiente</string>
+    <string name="selectPasient">Seleccione paciente</string>
     <string name="selectDoctor">Seleccione doctor </string>
     <string name="stateAppointment">Estado </string>
     <string name="addAppointmentBtn">Agregar </string>

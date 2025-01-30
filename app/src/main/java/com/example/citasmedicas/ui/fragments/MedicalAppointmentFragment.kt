@@ -20,16 +20,15 @@ import com.example.citasmedicas.viewModel.AppointmentsViewModel
 import com.example.citasmedicas.viewModel.DoctorViewModel
 import com.example.citasmedicas.viewModel.UserViewModel
 
-
 class MedicalAppointmentFragment : Fragment() {
-    //atributes
-    private var userName:String? = null
+    // Atributos
+    private var userName: String? = null
     private var _binding: FragmentMedicalAppointmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var userViewModel: UserViewModel
-    private lateinit var database:AppDatabase
-    private lateinit var appointmentViewModel:AppointmentsViewModel
-
+    private lateinit var database: AppDatabase
+    private lateinit var appointmentViewModel: AppointmentsViewModel
+    private lateinit var doctorViewModel: DoctorViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,78 +36,98 @@ class MedicalAppointmentFragment : Fragment() {
     ): View? {
         // Inflar la vista utilizando View Binding
         _binding = FragmentMedicalAppointmentBinding.inflate(inflater, container, false)
-         userName = arguments?.getString("userName")
+        userName = arguments?.getString("userName")
 
         userViewModel = UserViewModel()
-        database = AppDatabase.getDatabase(requireContext())//data base
-        appointmentViewModel= AppointmentsViewModel()
+        database = AppDatabase.getDatabase(requireContext())  // Base de datos
+        appointmentViewModel = AppointmentsViewModel()
+        doctorViewModel = DoctorViewModel()
+
+        // Configuración de la UI del usuario
         setUserUI()
 
-        // Configurar el listener del botón utilizando View Binding
-      clickListeners()
+        // Configurar el listener del botón
+        clickListeners()
 
-
-        // Retornar la vista inflada por View Binding
         return binding.root
     }
 
-
     private fun setUserUI() {
-        Log.d("User",userName.toString())
+        Log.d("User", userName.toString())
 
-        userViewModel.selectUserByUserName(// ask view model for an user
-            name=userName.toString(),
-            database = database,
-            doSometing = {user->
-                if (user.type=="Admin"){
-                    binding.userTitle.text = "${user.type} : ${user.name}"
-                    setAdminUI(user)
-                }else if (user.type=="Paciente"){
-                    binding.userTitle.text = "${user.type} : ${user.name}"
-                    setPacientUI(user)
-                }
+        // Obtener el usuario por su nombre de usuario
+        userViewModel.selectUserByUserName(
+            name = userName.toString(),
+            database = database
+        ) { user ->
+            binding.userTitle.text = "${user.type} : ${user.name}"
+            if (user.type == "Admin") {
+                setAdminUI()
+            } else if (user.type == "Paciente") {
+                setPacientUI(user)
             }
-        )
+        }
     }
 
-    private fun setAdminUI(user: User) {
-        val appointmentViewModel = AppointmentsViewModel()
+    private fun setAdminUI() {
         appointmentViewModel.getAllAppointments(
-            database = database,
-            doSometing = {appointments->
-                Log.d("appointments",appointments.toString())
-                 val appointmentItems = arrayListOf<AppointmentItem>()
-                for( a in appointments){
-                    val appointmentItem =AppointmentItem(
-                        userName = a.id.toString(),
-                        dateAppointment = a.fecha,
-                        hourAppointment=a.hora,
-                        doctorName = a.medicoId.toString(),
-                        specialityDoctor = ""
-                        )
-                    appointmentItems.add(appointmentItem)
-
-                }
-                Log.d("appointments",appointmentItems.toString())
-
-                //recycler
-                val appointMentAdapter = AppointmentAdapter(appointmentItems)
-
-                val recyclerView: RecyclerView = binding.appointmentRecycler
-                recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = appointMentAdapter
-
-
+            database = database
+        ) { appointments ->
+            val appointmentItems = appointments.map {
+                AppointmentItem(
+                    userName = it.id.toString(),
+                    dateAppointment = it.fecha,
+                    hourAppointment = it.hora,
+                    doctorName = it.medicoId.toString(),
+                    specialityDoctor = "" // Asumiendo que no es necesario cargar el especialidad para el Admin
+                )
             }
-        )
+            updateRecyclerView(appointmentItems)
+        }
     }
 
     private fun setPacientUI(user: User) {
+        appointmentViewModel.getAppointmentByUserId(
+            id = user.id,
+            database = database
+        ) { appointments ->
+            val appointmentItems = mutableListOf<AppointmentItem>()
+            var processedAppointments = 0  // Contador de citas procesadas
 
+            appointments.forEach { appointment ->
+                doctorViewModel.selectDoctorById(
+                    id = appointment.medicoId,
+                    database = database
+                ) { doctor ->
+                    val appointmentItem = AppointmentItem(
+                        userName = "",
+                        dateAppointment = appointment.fecha,
+                        hourAppointment = appointment.hora,
+                        doctorName = doctor.name,
+                        specialityDoctor = doctor.specialty
+                    )
+                    appointmentItems.add(appointmentItem)
+                    processedAppointments++
+
+                    if (processedAppointments == appointments.size) {
+                        updateRecyclerView(appointmentItems)
+                    }
+                }
+            }
+        }
     }
 
-    private fun clickListeners() {//handle listeners click buttons
-        binding.scheduleBtn.setOnClickListener {//go to schedule appointment and send userName
+    private fun updateRecyclerView(appointmentItems: List<AppointmentItem>) {
+        val appointmentAdapter = AppointmentAdapter(appointmentItems)
+        requireActivity().runOnUiThread {
+            val recyclerView: RecyclerView = binding.appointmentRecycler
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = appointmentAdapter
+        }
+    }
+
+    private fun clickListeners() {
+        binding.scheduleBtn.setOnClickListener {
             Utils.sendUserNameToAnotherFragment(
                 currentFragment = this,
                 userName = userName!!,
@@ -117,13 +136,9 @@ class MedicalAppointmentFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         // Evitar pérdidas de memoria
         _binding = null
     }
-
-
 }
-

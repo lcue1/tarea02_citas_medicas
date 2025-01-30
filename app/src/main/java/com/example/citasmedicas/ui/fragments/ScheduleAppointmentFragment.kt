@@ -21,7 +21,6 @@ import com.example.citasmedicas.viewModel.AppointmentsViewModel
 import com.example.citasmedicas.viewModel.DoctorViewModel
 import com.example.citasmedicas.viewModel.UserViewModel
 
-
 class ScheduleAppointmentFragment : Fragment() {
 
     //atributes
@@ -38,6 +37,7 @@ class ScheduleAppointmentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentScheduleAppointmentBinding.inflate(inflater, container, false)
+
 
 
         userName = arguments?.getString("userName")
@@ -135,7 +135,6 @@ class ScheduleAppointmentFragment : Fragment() {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.doctorIdSpiner.adapter = adapter2
 
-        pasientSelected = binding.pacientIdSpiner.selectedItem.toString()
         doctorSelected = binding.doctorIdSpiner.selectedItem.toString()
 
 
@@ -143,6 +142,21 @@ class ScheduleAppointmentFragment : Fragment() {
 
 
     private fun setPacientUI(user: User, doctors:List<Doctor>) {
+        requireActivity().runOnUiThread {
+            binding.pacientIdSpiner.visibility=View.GONE//hide spiner admin function
+            binding.titleSelectPacient.text="Paciente : ${user.name} id: ${user.id}"//change title
+        }
+        //load doctros in spiner
+        val doctorItems = doctors.map { "Dr : ${it.name}, Especialidad : ${it.specialty} id: ${it.id}" }
+        val adapter2 =  ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            doctorItems
+        )
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.doctorIdSpiner.adapter = adapter2
+
+        doctorSelected = binding.doctorIdSpiner.selectedItem.toString()
 
     }
 
@@ -211,7 +225,51 @@ class ScheduleAppointmentFragment : Fragment() {
 
 
             }else{
-            //falta programar el paciente
+                pasientSelected = binding.titleSelectPacient.text.toString()
+                doctorSelected = binding.doctorIdSpiner.selectedItem.toString()
+                val dateAppointment = "${binding.dateAppointment.dayOfMonth}:" +
+                        "${binding.dateAppointment.month}:" +
+                        "${binding.dateAppointment.year}"
+                val time = binding.timeAppointmentSpiner.selectedItem.toString()
+
+                Log.d("infotoadd",pasientSelected.last().toString())
+                Log.d("infotoadd",doctorSelected.last().toString())
+                Log.d("infotoadd",dateAppointment)
+                Log.d("infotoadd",time)
+                val database =AppDatabase.getDatabase(requireContext())
+                val appoinmentViewModel = AppointmentsViewModel()
+                val appointment =Appointment(
+                    usuarioId = pasientSelected.last().digitToInt(),
+                    medicoId = doctorSelected.last().digitToInt(),
+                    fecha = dateAppointment,
+                    hora = time,
+                    estado = binding.stateAppointment.text.toString()
+                )
+
+                Log.d("infotoadd",appointment.toString())
+
+                appoinmentViewModel.inserAppointment(
+                    appointment = appointment,
+                    database = database,
+                    onSuccess = {// message to uset indicate succes appointment and reutnr to medicalAppointment fragment
+                        Log.d("errorrrr","agregado")
+                        requireActivity().runOnUiThread {
+                            Toast.makeText(requireContext(), "Cita agregada exitosamente", Toast.LENGTH_SHORT)
+                                .show()
+
+                            Utils.sendUserNameToAnotherFragment(//go to medicalAppointmentFragment
+                                currentFragment = this,
+                                userName = userName!!,
+                                targetFragment = R.id.action_scheduleAppointmentFragment_to_medicalAppointmentFragment
+                            )
+                        }
+
+                    },
+                    onError = {error ->
+                        Log.d("errorrrr",error.toString())
+
+                    }
+                )
             }
         }
     }

@@ -16,4 +16,7 @@ interface AppointmentsDao {
     @Query("SELECT * FROM Appointments ORDER BY fecha ASC, medicoId ASC")
     suspend fun getAllAppointments(): List<Appointment>
 
+    @Query("SELECT * FROM Appointments WHERE usuarioId = :usuarioId")
+    suspend fun getById(usuarioId: Int): List<Appointment>
+
 }
