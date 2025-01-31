@@ -39,4 +39,17 @@ class AppointmentsViewModel : ViewModel() {
             doSometing(appointments)
         }
     }
+
+    fun getByAppointmentId(appointmentId: Int,database: AppDatabase, doSometing:(Appointment)->Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val appointment = database.appointmentsDao().getByAppointmentId(appointmentId)
+            doSometing(appointment)
+        }
+    }
+    fun updateAppointment(usuarioId:Int, medicoId:Int,  fecha:String,hora:String, estado:String,database: AppDatabase, doSometing:(Int)->Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val appointment = database.appointmentsDao().updateAppointment(usuarioId, medicoId,  fecha,hora, estado)
+            doSometing(appointment)
+        }
+    }
 }

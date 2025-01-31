@@ -3,12 +3,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.EditFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginBottom="64dp"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
+        <TextView
+            android:id="@+id/titleEditAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titleEditFragmenta"
+            style="@style/titleText"
+            />
+
+        <TextView
+            android:id="@+id/idUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="idApointment"
+            style="@style/normaText"
+            android:layout_marginTop="16dp"
+            />
+
+        <TextView
+            android:id="@+id/actualDoctor"
+            style="@style/normaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doctor"
+            android:layout_marginTop="16dp"/>
+
+        <Spinner
+            android:id="@+id/doctorSpiner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:id="@+id/stateAppointment"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Estado"
+            style="@style/normalEditText"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+
+            >
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora"
+                app:layout_constraintTop_toBottomOf="@id/titleEditAppointment"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/normaText"
+                />
+            <Spinner
+                android:id="@+id/hourSpiner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+        <DatePicker
+            android:id="@+id/dateAppointment"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/goMedicalAppointmentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/normalBtn"
+
+                android:text="@string/returnToMedicalBtn"
+                />
+            <Button
+                android:id="@+id/editAppointmentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/addBtn"
+
+                android:text="@string/editAppointment"
+                />
+            <Button
+                android:id="@+id/deleteAppointmentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/exitBtn"
+
+                android:text="@string/deleteAppointment"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>

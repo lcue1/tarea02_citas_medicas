@@ -75,7 +75,7 @@ class MedicalAppointmentFragment : Fragment() {
         ) { appointments ->
             val appointmentItems = appointments.map {
                 AppointmentItem(
-                    userName = it.id.toString(),
+                    idUserName = it.id.toString(),
                     dateAppointment = it.fecha,
                     hourAppointment = it.hora,
                     doctorName = it.medicoId.toString(),
@@ -100,7 +100,7 @@ class MedicalAppointmentFragment : Fragment() {
                     database = database
                 ) { doctor ->
                     val appointmentItem = AppointmentItem(
-                        userName = "",
+                        idUserName = appointment.id.toString(),
                         dateAppointment = appointment.fecha,
                         hourAppointment = appointment.hora,
                         doctorName = doctor.name,
@@ -118,7 +118,16 @@ class MedicalAppointmentFragment : Fragment() {
     }
 
     private fun updateRecyclerView(appointmentItems: List<AppointmentItem>) {
-        val appointmentAdapter = AppointmentAdapter(appointmentItems)
+        val appointmentAdapter = AppointmentAdapter(
+            appointments = appointmentItems,
+            updateAppointment = {idAppointment->
+                Utils.sendUserNameToAnotherFragment(
+                    currentFragment = this,
+                    userName = idAppointment,
+                    targetFragment = R.id.action_medicalAppointmentFragment_to_editFragment
+                )
+            }
+        )
         requireActivity().runOnUiThread {
             val recyclerView: RecyclerView = binding.appointmentRecycler
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -134,6 +143,7 @@ class MedicalAppointmentFragment : Fragment() {
                 targetFragment = R.id.action_medicalAppointmentFragment_to_scheduleAppointmentFragment
             )
         }
+
     }
 
     override fun onDestroyView() {

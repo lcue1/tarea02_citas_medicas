@@ -17,6 +17,9 @@
             android:name="userName"
             app:argType="string"
             android:defaultValue="undefined" />
+        <action
+            android:id="@+id/action_medicalAppointmentFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/scheduleAppointmentFragment"
@@ -25,6 +28,15 @@
         tools:layout="@layout/fragment_schedule_appointment" >
         <action
             android:id="@+id/action_scheduleAppointmentFragment_to_medicalAppointmentFragment"
+            app:destination="@id/medicalAppointmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.example.citasmedicas.ui.fragments.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <action
+            android:id="@+id/action_editFragment_to_medicalAppointmentFragment"
             app:destination="@id/medicalAppointmentFragment" />
     </fragment>
 </navigation>

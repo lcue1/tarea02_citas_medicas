@@ -14,8 +14,11 @@
     <string name="selectDoctor">Seleccione doctor </string>
     <string name="stateAppointment">Estado </string>
     <string name="addAppointmentBtn">Agregar </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Edit fragment -->
+    <string name="titleEditFragmenta">Editar </string>
+    <string name="returnToMedicalBtn">Mis citas</string>
+    <string name="editAppointment">Editar</string>
+    <string name="deleteAppointment">Eliminar</string>
 
 
 </resources>

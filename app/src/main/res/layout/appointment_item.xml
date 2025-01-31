@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/appointmentItem"
     android:layout_width="match_parent"
     android:layout_height="142dp"
     android:layout_marginTop="32dp"
@@ -71,6 +72,7 @@
         style="@style/SpecialityTextViewStyle" />
 
         <Button
+            android:id="@+id/editItemBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

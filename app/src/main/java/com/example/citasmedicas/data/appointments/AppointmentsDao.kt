@@ -19,4 +19,10 @@ interface AppointmentsDao {
     @Query("SELECT * FROM Appointments WHERE usuarioId = :usuarioId")
     suspend fun getById(usuarioId: Int): List<Appointment>
 
+    @Query("SELECT * FROM Appointments WHERE id = :appointmentId")
+    suspend fun getByAppointmentId(appointmentId: Int): Appointment
+
+    @Query("UPDATE Appointments SET medicoId =:medicoId, fecha =:fecha, hora = :hora, estado = :estado WHERE usuarioId =:usuarioId and medicoId = :medicoId")
+    suspend fun  updateAppointment(usuarioId:Int, medicoId:Int,  fecha:String,hora:String, estado:String):Int
+
 }
