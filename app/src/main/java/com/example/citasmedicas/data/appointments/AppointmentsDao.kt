@@ -22,7 +22,10 @@ interface AppointmentsDao {
     @Query("SELECT * FROM Appointments WHERE id = :appointmentId")
     suspend fun getByAppointmentId(appointmentId: Int): Appointment
 
-    @Query("UPDATE Appointments SET medicoId =:medicoId, fecha =:fecha, hora = :hora, estado = :estado WHERE usuarioId =:usuarioId and medicoId = :medicoId")
-    suspend fun  updateAppointment(usuarioId:Int, medicoId:Int,  fecha:String,hora:String, estado:String):Int
+    @Query("UPDATE Appointments SET medicoId =:medicoId, fecha =:fecha, hora = :hora, estado = :estado WHERE id =:appointmentId")
+    suspend fun updateAppointment(appointmentId: Int, medicoId: Int, fecha: String, hora: String, estado: String): Int
+
+    @Query("DELETE FROM Appointments WHERE id=:appointmentId")
+    suspend fun deleteAppointmentById(appointmentId: Int): Int
 
 }

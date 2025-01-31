@@ -128,6 +128,18 @@ class EditFragment : Fragment() {
         binding.editAppointmentBtn.setOnClickListener {
             getInformationFromView()
         }
+
+        binding.deleteAppointmentBtn.setOnClickListener {
+            val appointmentViewModel =AppointmentsViewModel()
+            appointmentViewModel.deleteAppointment(
+                appointmentId = appointmentId!!.toInt(),
+                database = database,
+                doSometing = {appointment->
+                    Log.d("appoinmentdeleted",appointment.toString())
+
+                }
+            )
+        }
     }
 
     private fun getInformationFromView() {
@@ -141,7 +153,7 @@ class EditFragment : Fragment() {
         val stateAppointment = binding.stateAppointment.text.toString()
 
         appointmentViewModel.updateAppointment(
-            usuarioId =userId.toInt(),
+            appointmentId = appointmentId!!.toInt(),
             hora = hour,
             fecha = fecha,
             database = database,
