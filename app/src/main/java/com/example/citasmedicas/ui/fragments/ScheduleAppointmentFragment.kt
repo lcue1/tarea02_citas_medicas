@@ -1,5 +1,13 @@
 package com.example.citasmedicas.ui.fragments
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,6 +28,7 @@ import com.example.citasmedicas.utils.Validations
 import com.example.citasmedicas.viewModel.AppointmentsViewModel
 import com.example.citasmedicas.viewModel.DoctorViewModel
 import com.example.citasmedicas.viewModel.UserViewModel
+import java.util.Locale
 
 class ScheduleAppointmentFragment : Fragment() {
 
@@ -224,7 +233,7 @@ class ScheduleAppointmentFragment : Fragment() {
                 )
 
 
-            }else{
+            }else{//is pacient
                 pasientSelected = binding.titleSelectPacient.text.toString()
                 doctorSelected = binding.doctorIdSpiner.selectedItem.toString()
                 val dateAppointment = "${binding.dateAppointment.dayOfMonth}:" +
@@ -264,6 +273,8 @@ class ScheduleAppointmentFragment : Fragment() {
                             )
                         }
 
+                        //programming mananger notification
+                        programateNotification(requireContext(), dateAppointment, time)
                     },
                     onError = {error ->
                         Log.d("errorrrr",error.toString())
@@ -273,6 +284,46 @@ class ScheduleAppointmentFragment : Fragment() {
             }
         }
     }
+
+    @SuppressLint("ServiceCast")
+    fun programateNotification(context: Context, fecha: String, hora: String) {
+        val tiempoNotificacion = convertirFechaHoraAMilisegundos(fecha, hora)
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, NotificacionReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, tiempoNotificacion, pendingIntent)
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, tiempoNotificacion, pendingIntent)
+        }
+    }
+    fun convertirFechaHoraAMilisegundos(fecha: String, hora: String): Long {
+        val dateParts = fecha.split(":") // Divide "DD:MM:YYYY"
+        val day = dateParts[0].toInt()
+        val month = dateParts[1].toInt()
+        val year = dateParts[2].toInt()
+
+        val timeParts = hora.split(":") // Divide "HH:MM AM/PM"
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val date = timeFormat.parse(hora) ?: return 0
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month)
+            set(Calendar.DAY_OF_MONTH, day)
+            set(Calendar.HOUR_OF_DAY, date.hours)
+            set(Calendar.MINUTE, date.minutes)
+            set(Calendar.SECOND, 0)
+        }
+
+        return calendar.timeInMillis - 3600000 // 1 hora antes
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
